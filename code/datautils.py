@@ -642,12 +642,18 @@ def generate_relational_edges(milemarkers, timesteps):
     
     return edge_connections.T, relations
 
-def load_best_parameters(study_name):
+def load_best_parameters(study_name,hide_anomalies=False):
     # Load the study from the specified directory
-    study = optuna.study.load_study(
-        study_name=study_name,  # Replace with your study name
-        storage=f"sqlite:///studies/{study_name}.db"  # Replace with the path to your SQLite database
-    )
+    if hide_anomalies:
+        study = optuna.study.load_study(
+            study_name=study_name,  # Replace with your study name
+            storage=f"sqlite:///studies_hide/{study_name}.db"  # Replace with the path to your SQLite database
+        )
+    else:
+        study = optuna.study.load_study(
+            study_name=study_name,  # Replace with your study name
+            storage=f"sqlite:///studies_non_hide/{study_name}.db"  # Replace with the path to your SQLite database
+        )
 
     # Get the best trial
     best_trial = study.best_trial

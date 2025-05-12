@@ -68,3 +68,15 @@ class MLPAEParameters:
     num_features: int 
     latent_dim: int 
     hidden_dim: int
+    
+@dataclass
+class GraphTransformerNormalizingFlowParameters:
+    input_features: int
+    num_sensors: int
+    hidden_dim: int
+    output_dim: int
+    num_gcn_layers: int
+    num_transformer_layers: int
+    flow_layers: int
+    num_heads: int
+
